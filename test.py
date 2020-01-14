@@ -1,9 +1,61 @@
+import sys
 import csv
 import ctypes
+import matplotlib
+matplotlib.use('Qt5Agg')
 from matplotlib import pyplot as plt
+from PyQt5 import QtWidgets, QtCore
+from matplotlib.backends.backend_qt5agg import FigureCanvasQTAgg as FigureCanvas
+from matplotlib.backends.backend_qt5agg import NavigationToolbar2QT as NavigationToolbar
+import numpy as np
+
+class ScrollableWindow(QtWidgets.QMainWindow):
+    def __init__(self, fig, ax, step=0.1):
+        plt.close("all")
+        if not QtWidgets.QApplication.instance():
+            self.app = QtWidgets.QApplication(sys.argv)
+        else:
+            self.app = QtWidgets.QApplication.instance() 
+
+        QtWidgets.QMainWindow.__init__(self)
+        self.widget = QtWidgets.QWidget()
+        self.setCentralWidget(self.widget)
+        self.widget.setLayout(QtWidgets.QVBoxLayout())
+        self.widget.layout().setContentsMargins(0,0,0,0)
+        self.widget.layout().setSpacing(0)
+
+        self.fig = fig
+        self.ax = ax
+        self.canvas = FigureCanvas(self.fig)
+        self.canvas.draw()
+        self.scroll = QtWidgets.QScrollBar(QtCore.Qt.Horizontal)
+        self.step = step
+        self.setupSlider()
+        self.nav = NavigationToolbar(self.canvas, self.widget)
+        self.widget.layout().addWidget(self.nav)
+        self.widget.layout().addWidget(self.canvas)
+        self.widget.layout().addWidget(self.scroll)
+
+        self.canvas.draw()
+        self.show()
+        self.app.exec_()
+
+    def setupSlider(self):
+        self.lims = np.array(self.ax.get_xlim())
+        self.scroll.setPageStep(self.step*100)
+        self.scroll.actionTriggered.connect(self.update)
+        self.update()
+
+    def update(self, evt=None):
+        r = self.scroll.value()/((1+self.step)*100)
+        l1 = self.lims[0]+r*np.diff(self.lims)
+        l2 = l1 +  np.diff(self.lims)*self.step
+        self.ax.set_xlim(l1,l2)
+        print(self.scroll.value(), l1,l2)
+        self.fig.canvas.draw_idle()
 
 # Get imu_time, roll_deg, and pitch_deg ... from file.
-filename = 'JY-L1-001 2020-01-06 02-00-59.snapshot.csv'
+filename = 'JY-M1-001 2020-01-10 18-49-41.snapshot.csv'
 with open(filename) as f:
 	reader = csv.reader(f)
 	header_row = next(reader)
@@ -128,8 +180,8 @@ if whnd != 0:
     ctypes.windll.user32.ShowWindow(whnd, 0)    
     ctypes.windll.kernel32.CloseHandle(whnd) 
 
-# Plot data.
-fig = plt.figure('imu',dpi=128, figsize=(12, 6))
+#绘制第一张图，陀螺仪信息
+fig1 = plt.figure('imu',dpi=128, figsize=(12, 6))
 plt.subplot(331)
 plt.plot(imu_times, roll_degs, c='red', alpha=0.5)
 plt.title('roll_degree')
@@ -194,7 +246,8 @@ plt.ylabel('z_acc')
 plt.grid(True)
 plt.tight_layout()
 
-fig = plt.figure('actual joint motion-HipX',dpi=128, figsize=(12, 6))
+#绘制第二张图，各HipX关节角度
+fig2 = plt.figure('actual joint motion-HipX',dpi=128, figsize=(12, 6))
 plt.subplot(221)
 plt.plot(imu_times, in_FL_HipX_Angs, c='red', alpha=0.5)
 plt.title('in_FL_HipX_Angle')
@@ -209,19 +262,21 @@ plt.xlabel('time(s)')
 plt.ylabel('in_FR_HipX_Ang(rad)')
 plt.grid(True)
 
-plt.subplot(223)
+ax1 = plt.subplot(223)
 plt.plot(imu_times, in_HL_HipX_Angs, c='red', alpha=0.5)
 plt.title('in_HL_HipX_Angle')
 plt.xlabel('time(s)')
 plt.ylabel('in_HL_HipX_Ang(rad)')
 plt.grid(True)
 
-plt.subplot(224)
+ax2 = plt.subplot(224)
 plt.plot(imu_times, in_HR_HipX_Angs, c='red', alpha=0.5)
 plt.title('in_HR_HipX_Angle')
 plt.xlabel('time(s)')
 plt.ylabel('in_HR_HipX_Ang(rad)')
 plt.grid(True)
-
 plt.tight_layout()
+ScrollableWindow(fig2,ax1,0.01)
+ScrollableWindow(fig2,ax2,0.01)
+#绘制第三张图，各HipX关节角速度
 plt.show()
