@@ -41,13 +41,12 @@ def draw_imu(para_x,para_y):
         para_y += 1
         plt.tight_layout()
 def scatter_imu(para_x,para_y):
-    x_axis_start = 550
-    x_axis_end = 551
+    x_axis_start = int(para_x[0])
+    x_axis_end = x_axis_start + 1
     for i in range(0,len(para_x)):
         plt.scatter(para_x[i],para_y[i])
-        plt.pause(0.010)
-
-        if i % 10 == 0 and i > 1:
+        plt.pause(0.0000000000000000000000001)
+        if int(para_x[i]) >= x_axis_end:
             x_axis_start += 1
             x_axis_end += 1
             plt.axis([x_axis_start,x_axis_end,-10,10])
