@@ -1,0 +1,285 @@
+0 ,Timestamp (s),Timestamp (s)
+1 ,Cost_Time (us),Cost_Time (us)
+2 ,Alg_Cycle_Time (us),Alg_Cycle_Time (us)
+3 ,Ecat_Avg_Time (us),Ecat_Avg_Time (us)
+4 ,Ecat_Max_Time (us),Ecat_Max_Time (us)
+5 ,Ecat_Min_Time (us),Ecat_Min_Time (us)
+6 ,CPU_Rate (%),CPU_Rate (%)
+7 ,IMU_Time (s),IMU_Time (s)
+8 ,Roll (deg),Roll (deg)
+9 ,Pitch (deg),Pitch (deg)
+10 ,Yaw (deg),Yaw (deg)
+11 ,Roll_Vel (rad/s),Roll_Vel (rad/s)
+12 ,Pitch_Vel (rad/s),Pitch_Vel (rad/s)
+13 ,Yaw_Vel (rad/s),Yaw_Vel (rad/s)
+14 ,X_Acc (m/s^2),X_Acc (m/s^2)
+15 ,Y_Acc (m/s^2),Y_Acc (m/s^2)
+16 ,Z_Acc (m/s^2),Z_Acc (m/s^2)
+17 ,Contact_Time (s),Contact_Time (s)
+18 ,Contact_1,Contact_1
+19 ,Contact_2,Contact_2
+20 ,Contact_3,Contact_3
+21 ,Contact_4,Contact_4
+22 ,IN_FL_HipX_Ang (rad),IN_FL_HipX_Ang (rad)
+23 ,IN_FL_HipY_Ang (rad),IN_FL_HipY_Ang (rad)
+24 ,IN_FL_Knee_Ang (rad),IN_FL_Knee_Ang (rad)
+25 ,IN_FL_HipX_Vel (rad/s),IN_FR_HipX_Ang (rad)
+26 ,IN_FL_HipY_Vel (rad/s),IN_FR_HipY_Ang (rad)
+27 ,IN_FL_Knee_Vel (rad/s),IN_FR_Knee_Ang (rad)
+28 ,IN_FL_HipX_Tor (Nm),IN_HL_HipX_Ang (rad)
+29 ,IN_FL_HipY_Tor (Nm),IN_HL_HipY_Ang (rad)
+30 ,IN_FL_Knee_Tor (Nm),IN_HL_Knee_Ang (rad)
+31 ,IN_FR_HipX_Ang (rad),IN_HR_HipX_Ang (rad)
+32 ,IN_FR_HipY_Ang (rad),IN_HR_HipY_Ang (rad)
+33 ,IN_FR_Knee_Ang (rad),IN_HR_Knee_Ang (rad)
+34 ,IN_FR_HipX_Vel (rad/s),IN_FL_HipX_Vel (rad/s)
+35 ,IN_FR_HipY_Vel (rad/s),IN_FL_HipY_Vel (rad/s)
+36 ,IN_FR_Knee_Vel (rad/s),IN_FL_Knee_Vel (rad/s)
+37 ,IN_FR_HipX_Tor (Nm),IN_FR_HipX_Vel (rad/s)
+38 ,IN_FR_HipY_Tor (Nm),IN_FR_HipY_Vel (rad/s)
+39 ,IN_FR_Knee_Tor (Nm),IN_FR_Knee_Vel (rad/s)
+40 ,IN_HL_HipX_Ang (rad),IN_HL_HipX_Vel (rad/s)
+41 ,IN_HL_HipY_Ang (rad),IN_HL_HipY_Vel (rad/s)
+42 ,IN_HL_Knee_Ang (rad),IN_HL_Knee_Vel (rad/s)
+43 ,IN_HL_HipX_Vel (rad/s),IN_HR_HipX_Vel (rad/s)
+44 ,IN_HL_HipY_Vel (rad/s),IN_HR_HipY_Vel (rad/s)
+45 ,IN_HL_Knee_Vel (rad/s),IN_HR_Knee_Vel (rad/s)
+46 ,IN_HL_HipX_Tor (Nm),IN_FL_HipX_Tor (Nm)
+47 ,IN_HL_HipY_Tor (Nm),IN_FL_HipY_Tor (Nm)
+48 ,IN_HL_Knee_Tor (Nm),IN_FL_Knee_Tor (Nm)
+49 ,IN_HR_HipX_Ang (rad),IN_FR_HipX_Tor (Nm)
+50 ,IN_HR_HipY_Ang (rad),IN_FR_HipY_Tor (Nm)
+51 ,IN_HR_Knee_Ang (rad),IN_FR_Knee_Tor (Nm)
+52 ,IN_HR_HipX_Vel (rad/s),IN_HL_HipX_Tor (Nm)
+53 ,IN_HR_HipY_Vel (rad/s),IN_HL_HipY_Tor (Nm)
+54 ,IN_HR_Knee_Vel (rad/s),IN_HL_Knee_Tor (Nm)
+55 ,IN_HR_HipX_Tor (Nm),IN_HR_HipX_Tor (Nm)
+56 ,IN_HR_HipY_Tor (Nm),IN_HR_HipY_Tor (Nm)
+57 ,IN_HR_Knee_Tor (Nm),IN_HR_Knee_Tor (Nm)
+58 ,OUT_FL_HipX_Ang (rad),OUT_FL_HipX_Ang (rad)
+59 ,OUT_FL_HipY_Ang (rad),OUT_FL_HipY_Ang (rad)
+60 ,OUT_FL_Knee_Ang (rad),OUT_FL_Knee_Ang (rad)
+61 ,OUT_FL_HipX_Vel (rad/s),OUT_FR_HipX_Ang (rad)
+62 ,OUT_FL_HipY_Vel (rad/s),OUT_FR_HipY_Ang (rad)
+63 ,OUT_FL_Knee_Vel (rad/s),OUT_FR_Knee_Ang (rad)
+64 ,OUT_FL_HipX_Tor (Nm),OUT_HL_HipX_Ang (rad)
+65 ,OUT_FL_HipY_Tor (Nm),OUT_HL_HipY_Ang (rad)
+66 ,OUT_FL_Knee_Tor (Nm),OUT_HL_Knee_Ang (rad)
+67 ,OUT_FR_HipX_Ang (rad),OUT_HR_HipX_Ang (rad)
+68 ,OUT_FR_HipY_Ang (rad),OUT_HR_HipY_Ang (rad)
+69 ,OUT_FR_Knee_Ang (rad),OUT_HR_Knee_Ang (rad)
+70 ,OUT_FR_HipX_Vel (rad/s),OUT_FL_HipX_Vel (rad/s)
+71 ,OUT_FR_HipY_Vel (rad/s),OUT_FL_HipY_Vel (rad/s)
+72 ,OUT_FR_Knee_Vel (rad/s),OUT_FL_Knee_Vel (rad/s)
+73 ,OUT_FR_HipX_Tor (Nm),OUT_FR_HipX_Vel (rad/s)
+74 ,OUT_FR_HipY_Tor (Nm),OUT_FR_HipY_Vel (rad/s)
+75 ,OUT_FR_Knee_Tor (Nm),OUT_FR_Knee_Vel (rad/s)
+76 ,OUT_HL_HipX_Ang (rad),OUT_HL_HipX_Vel (rad/s)
+77 ,OUT_HL_HipY_Ang (rad),OUT_HL_HipY_Vel (rad/s)
+78 ,OUT_HL_Knee_Ang (rad),OUT_HL_Knee_Vel (rad/s)
+79 ,OUT_HL_HipX_Vel (rad/s),OUT_HR_HipX_Vel (rad/s)
+80 ,OUT_HL_HipY_Vel (rad/s),OUT_HR_HipY_Vel (rad/s)
+81 ,OUT_HL_Knee_Vel (rad/s),OUT_HR_Knee_Vel (rad/s)
+82 ,OUT_HL_HipX_Tor (Nm),OUT_FL_HipX_Tor (Nm)
+83 ,OUT_HL_HipY_Tor (Nm),OUT_FL_HipY_Tor (Nm)
+84 ,OUT_HL_Knee_Tor (Nm),OUT_FL_Knee_Tor (Nm)
+85 ,OUT_HR_HipX_Ang (rad),OUT_FR_HipX_Tor (Nm)
+86 ,OUT_HR_HipY_Ang (rad),OUT_FR_HipY_Tor (Nm)
+87 ,OUT_HR_Knee_Ang (rad),OUT_FR_Knee_Tor (Nm)
+88 ,OUT_HR_HipX_Vel (rad/s),OUT_HL_HipX_Tor (Nm)
+89 ,OUT_HR_HipY_Vel (rad/s),OUT_HL_HipY_Tor (Nm)
+90 ,OUT_HR_Knee_Vel (rad/s),OUT_HL_Knee_Tor (Nm)
+91 ,OUT_HR_HipX_Tor (Nm),OUT_HR_HipX_Tor (Nm)
+92 ,OUT_HR_HipY_Tor (Nm),OUT_HR_HipY_Tor (Nm)
+93 ,OUT_HR_Knee_Tor (Nm),OUT_HR_Knee_Tor (Nm)
+94 ,Scope_0,Scope_0
+95 ,Scope_1,Scope_1
+96 ,Scope_2,Scope_2
+97 ,Scope_3,Scope_3
+98 ,Scope_4,Scope_4
+99 ,Scope_5,Scope_5
+100 ,Scope_6,Scope_6
+101 ,Scope_7,Scope_7
+102 ,Scope_8,Scope_8
+103 ,Scope_9,Scope_9
+104 ,Scope_10,Scope_10
+105 ,Scope_11,Scope_11
+106 ,Scope_12,Scope_12
+107 ,Scope_13,Scope_13
+108 ,Scope_14,Scope_14
+109 ,Scope_15,Scope_15
+110 ,Scope_16,Scope_16
+111 ,Scope_17,Scope_17
+112 ,Scope_18,Scope_18
+113 ,Scope_19,Scope_19
+114 ,Scope_20,Scope_20
+115 ,Scope_21,Scope_21
+116 ,Scope_22,Scope_22
+117 ,Scope_23,Scope_23
+118 ,Scope_24,Scope_24
+119 ,Scope_25,Scope_25
+120 ,Scope_26,Scope_26
+121 ,Scope_27,Scope_27
+122 ,Scope_28,Scope_28
+123 ,Scope_29,Scope_29
+124 ,Scope_30,Scope_30
+125 ,Scope_31,Scope_31
+126 ,Scope_32,Scope_32
+127 ,Scope_33,Scope_33
+128 ,Scope_34,Scope_34
+129 ,Scope_35,Scope_35
+130 ,Scope_36,Scope_36
+131 ,Scope_37,Scope_37
+132 ,Scope_38,Scope_38
+133 ,Scope_39,Scope_39
+134 ,Scope_40,Scope_40
+135 ,Scope_41,Scope_41
+136 ,Scope_42,Scope_42
+137 ,Scope_43,Scope_43
+138 ,Scope_44,Scope_44
+139 ,Scope_45,Scope_45
+140 ,Scope_46,Scope_46
+141 ,Scope_47,Scope_47
+142 ,Scope_48,Scope_48
+143 ,Scope_49,Scope_49
+144 ,Scope_50,Scope_50
+145 ,Scope_51,Scope_51
+146 ,Scope_52,Scope_52
+147 ,Scope_53,Scope_53
+148 ,Scope_54,Scope_54
+149 ,Scope_55,Scope_55
+150 ,Scope_56,Scope_56
+151 ,Scope_57,Scope_57
+152 ,Scope_58,Scope_58
+153 ,Scope_59,Scope_59
+154 ,Scope_60,Scope_60
+155 ,Scope_61,Scope_61
+156 ,Scope_62,Scope_62
+157 ,Scope_63,Scope_63
+158 ,Scope_64,Scope_64
+159 ,Scope_65,Scope_65
+160 ,Scope_66,Scope_66
+161 ,Scope_67,Scope_67
+162 ,Scope_68,Scope_68
+163 ,Scope_69,Scope_69
+164 ,Scope_70,Scope_70
+165 ,Scope_71,Scope_71
+166 ,Scope_72,Scope_72
+167 ,Scope_73,Scope_73
+168 ,Scope_74,Scope_74
+169 ,Scope_75,Scope_75
+170 ,Scope_76,Scope_76
+171 ,Scope_77,Scope_77
+172 ,Scope_78,Scope_78
+173 ,Scope_79,Scope_79
+174 ,Scope_80,Scope_80
+175 ,Scope_81,Scope_81
+176 ,Scope_82,Scope_82
+177 ,Scope_83,Scope_83
+178 ,Scope_84,Scope_84
+179 ,Scope_85,Scope_85
+180 ,Scope_86,Scope_86
+181 ,Scope_87,Scope_87
+182 ,Scope_88,Scope_88
+183 ,Scope_89,Scope_89
+184 ,Scope_90,Scope_90
+185 ,Scope_91,Scope_91
+186 ,Scope_92,Scope_92
+187 ,Scope_93,Scope_93
+188 ,Scope_94,Scope_94
+189 ,Scope_95,Scope_95
+190 ,Scope_96,Scope_96
+191 ,Scope_97,Scope_97
+192 ,Scope_98,Scope_98
+193 ,Scope_99,Scope_99
+194 ,Scope_100,Scope_100
+195 ,Scope_101,Scope_101
+196 ,Scope_102,Scope_102
+197 ,Scope_103,Scope_103
+198 ,Scope_104,Scope_104
+199 ,Scope_105,Scope_105
+200 ,Scope_106,Scope_106
+201 ,Scope_107,Scope_107
+202 ,Scope_108,Scope_108
+203 ,Scope_109,Scope_109
+204 ,Scope_110,Scope_110
+205 ,Scope_111,Scope_111
+206 ,Scope_112,Scope_112
+207 ,Scope_113,Scope_113
+208 ,Scope_114,Scope_114
+209 ,Scope_115,Scope_115
+210 ,Scope_116,Scope_116
+211 ,Scope_117,Scope_117
+212 ,Scope_118,Scope_118
+213 ,Scope_119,Scope_119
+214 ,Scope_120,Scope_120
+215 ,Scope_121,Scope_121
+216 ,Scope_122,Scope_122
+217 ,Scope_123,Scope_123
+218 ,Scope_124,Scope_124
+219 ,Scope_125,Scope_125
+220 ,Scope_126,Scope_126
+221 ,Scope_127,Scope_127
+222 ,Scope_128,Scope_128
+223 ,Scope_129,Scope_129
+224 ,Scope_130,Scope_130
+225 ,Scope_131,Scope_131
+226 ,Scope_132,Scope_132
+227 ,Scope_133,Scope_133
+228 ,Scope_134,Scope_134
+229 ,Scope_135,Scope_135
+230 ,Scope_136,Scope_136
+231 ,Scope_137,Scope_137
+232 ,Scope_138,Scope_138
+233 ,Scope_139,Scope_139
+234 ,Scope_140,Scope_140
+235 ,Scope_141,Scope_141
+236 ,Scope_142,Scope_142
+237 ,Scope_143,Scope_143
+238 ,Scope_144,Scope_144
+239 ,Scope_145,Scope_145
+240 ,Scope_146,Scope_146
+241 ,Scope_147,Scope_147
+242 ,Scope_148,Scope_148
+243 ,Scope_149,Scope_149
+244 ,FL_HipX_Drive_Voltage (V),FL_HipX_Drive_Voltage (V)
+245 ,FL_HipY_Drive_Voltage (V),FL_HipY_Drive_Voltage (V)
+246 ,FL_Knee_Drive_Voltage (V),FL_Knee_Drive_Voltage (V)
+247 ,FR_HipX_Drive_Voltage (V),FR_HipX_Drive_Voltage (V)
+248 ,FR_HipY_Drive_Voltage (V),FR_HipY_Drive_Voltage (V)
+249 ,FR_Knee_Drive_Voltage (V),FR_Knee_Drive_Voltage (V)
+250 ,HL_HipX_Drive_Voltage (V),HL_HipX_Drive_Voltage (V)
+251 ,HL_HipY_Drive_Voltage (V),HL_HipY_Drive_Voltage (V)
+252 ,HL_Knee_Drive_Voltage (V),HL_Knee_Drive_Voltage (V)
+253 ,HR_HipX_Drive_Voltage (V),HR_HipX_Drive_Voltage (V)
+254 ,HR_HipY_Drive_Voltage (V),HR_HipY_Drive_Voltage (V)
+255 ,HR_Knee_Drive_Voltage (V),HR_Knee_Drive_Voltage (V)
+256 ,FL_HipX_Drive_Temp (C),FL_HipX_Drive_Temp (C)
+257 ,FL_HipY_Drive_Temp (C),FL_HipY_Drive_Temp (C)
+258 ,FL_Knee_Drive_Temp (C),FL_Knee_Drive_Temp (C)
+259 ,FR_HipX_Drive_Temp (C),FR_HipX_Drive_Temp (C)
+260 ,FR_HipY_Drive_Temp (C),FR_HipY_Drive_Temp (C)
+261 ,FR_Knee_Drive_Temp (C),FR_Knee_Drive_Temp (C)
+262 ,HL_HipX_Drive_Temp (C),HL_HipX_Drive_Temp (C)
+263 ,HL_HipY_Drive_Temp (C),HL_HipY_Drive_Temp (C)
+264 ,HL_Knee_Drive_Temp (C),HL_Knee_Drive_Temp (C)
+265 ,HR_HipX_Drive_Temp (C),HR_HipX_Drive_Temp (C)
+266 ,HR_HipY_Drive_Temp (C),HR_HipY_Drive_Temp (C)
+267 ,HR_Knee_Drive_Temp (C),HR_Knee_Drive_Temp (C)
+268 ,Motor_Temp_Time (s),Motor_Temp_Time (s)
+269 ,FL_HipX_Motor_Temp (C),FL_HipX_Motor_Temp (C)
+270 ,FL_HipY_Motor_Temp (C),FL_HipY_Motor_Temp (C)
+271 ,FL_Knee_Motor_Temp (C),FL_Knee_Motor_Temp (C)
+272 ,FR_HipX_Motor_Temp (C),FR_HipX_Motor_Temp (C)
+273 ,FR_HipY_Motor_Temp (C),FR_HipY_Motor_Temp (C)
+274 ,FR_Knee_Motor_Temp (C),FR_Knee_Motor_Temp (C)
+275 ,HL_HipX_Motor_Temp (C),HL_HipX_Motor_Temp (C)
+276 ,HL_HipY_Motor_Temp (C),HL_HipY_Motor_Temp (C)
+277 ,HL_Knee_Motor_Temp (C),HL_Knee_Motor_Temp (C)
+278 ,HR_HipX_Motor_Temp (C),HR_HipX_Motor_Temp (C)
+279 ,HR_HipY_Motor_Temp (C),HR_HipY_Motor_Temp (C)
+280 ,HR_Knee_Motor_Temp (C),HR_Knee_Motor_Temp (C)
+281 ,Reserved_Motor_Temp (C),Reserved_Motor_Temp (C)
+282 ,Reserved_Motor_Temp (C),Reserved_Motor_Temp (C)
+283 ,Reserved_Motor_Temp (C),Reserved_Motor_Temp (C)
+284 ,Reserved_Motor_Temp (C),Reserved_Motor_Temp (C)
