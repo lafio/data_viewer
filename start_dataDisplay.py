@@ -4,7 +4,7 @@ from PyQt5.QtWidgets import QApplication,QMainWindow,QGridLayout,QFileDialog
 import sys,csv
 from matplotlib import pyplot as plt
 from matplotlib.backends.backend_qt5agg import FigureCanvasQTAgg as FigureCanvas
-
+import numpy as np
 #在mainwindow绘制曲线并添加到gridlayout
 class curve_Display(QMainWindow,Ui_MainWindow):
     def __init__(self,index_dic):
@@ -36,6 +36,21 @@ class curve_Display(QMainWindow,Ui_MainWindow):
             self.comboBox_3.currentText()], self.comboBox_3.currentText()))
         self.comboBox_4.currentIndexChanged.connect(lambda: self.display(4, 7, index_dic[
             self.comboBox_4.currentText()], self.comboBox_4.currentText()))
+        self.scroll = self.horizontalScrollBar
+        self.step = 0.1
+    def setupSlider(self):
+        self.lims = np.array(self.f1.ax.get_xlim())
+        print(self.lims)
+        self.scroll.setPageStep(self.step * 100)
+        self.scroll.actionTriggered.connect(self.update)
+        self.update()
+    def update(self,evt=None):
+        r = self.scroll.value() / ((1 + self.step)*100)
+        l1 = self.lims[0] + r * np.diff(self.lims)
+        l2 = l1 + np.diff(self.lims) * self.step
+        self.f1.ax.set_xlim(l1, l2)
+        print(self.scroll.value(), l1, l2)
+        self.f1.canvas.draw_idle()
     def changeFigure(self,index):
         index_now = index_dic[index]
         return self.display(1,7,index_now,index)
@@ -52,6 +67,7 @@ class curve_Display(QMainWindow,Ui_MainWindow):
         else:
             getattr(self,'groupBox_'+str(n)).setTitle(title)
         f.Layout.addWidget(f.canvas)
+        self.setupSlider()
         print('画板放上去了')
 #定义画板并构造绘制函数
 class fig_Canvas():
@@ -60,14 +76,14 @@ class fig_Canvas():
         #plt.cla()
         self.fig = plt.figure()
         self.canvas = FigureCanvas(self.fig)
+        self.ax = self.fig.add_axes([0.08, 0.15, 0.9, 0.8])
     # 在画板上画图
     def draw_data(self,para_x,para_y):
-        ax = self.fig.add_axes([0.08, 0.15, 0.9, 0.8])
-        ax.clear()
+        self.ax.clear()
         x = globals()['para'+str(para_x)]
         y = globals()['para'+str(para_y)]
-        ax.plot(x,y)
-        ax.grid(True)
+        self.ax.plot(x,y)
+        self.ax.grid(True)
         self.canvas.draw()
         print('画好了')
 
