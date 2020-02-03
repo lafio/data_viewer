@@ -3,7 +3,6 @@ from PyQt5 import QtCore
 from PyQt5.QtWidgets import QApplication,QMainWindow,QGridLayout,QFileDialog
 import sys,csv
 from matplotlib import pyplot as plt
-from matplotlib.figure import Figure
 from matplotlib.backends.backend_qt5agg import FigureCanvasQTAgg as FigureCanvas
 
 #在mainwindow绘制曲线并添加到gridlayout
@@ -12,6 +11,14 @@ class curve_Display(QMainWindow,Ui_MainWindow):
         super().__init__()
         self.index_dic = index_dic
         self.setupUi(self)
+        self.f1 = fig_Canvas()
+        self.f2 = fig_Canvas()
+        self.f3 = fig_Canvas()
+        self.f4 = fig_Canvas()
+        self.Layout1 = QGridLayout(self.groupBox)
+        self.Layout2 = QGridLayout(self.groupBox_2)
+        self.Layout3 = QGridLayout(self.groupBox_3)
+        self.Layout4 = QGridLayout(self.groupBox_4)
         for k,v in index_dic.items():
             self.comboBox.addItem(k)
             self.comboBox_2.addItem(k)
@@ -37,20 +44,20 @@ class curve_Display(QMainWindow,Ui_MainWindow):
         for i in range(1,5):
             self.display(i,7,index+3*(i-1),title)
     def display(self,n,para_x,para_y,title):
-        self.f = fig_Canvas()
-        self.f.draw_data(para_x,para_y)
+        f = getattr(self,'f'+str(n))
+        f.draw_data(para_x,para_y)
+        f.Layout = getattr(self,'Layout'+str(n))
         if n == 1:
-            self.f.Layout = QGridLayout(self.groupBox)
             self.groupBox.setTitle(title)
         else:
-            self.f.Layout = QGridLayout(getattr(self,'groupBox_'+str(n)))
             getattr(self,'groupBox_'+str(n)).setTitle(title)
-        self.f.Layout.addWidget(self.f.canvas)
+        f.Layout.addWidget(f.canvas)
         print('画板放上去了')
 #定义画板并构造绘制函数
 class fig_Canvas():
     def __init__(self):
         #self.fig = Figure(figsize = (39,27),dpi=100)
+        #plt.cla()
         self.fig = plt.figure()
         self.canvas = FigureCanvas(self.fig)
     # 在画板上画图
