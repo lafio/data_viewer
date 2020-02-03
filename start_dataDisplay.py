@@ -37,7 +37,6 @@ class curve_Display(QMainWindow,Ui_MainWindow):
         for i in range(1,5):
             self.display(i,7,index+3*(i-1),title)
     def display(self,n,para_x,para_y,title):
-        self.figure_close()
         self.f = fig_Canvas()
         self.f.draw_data(para_x,para_y)
         if n == 1:
@@ -46,30 +45,23 @@ class curve_Display(QMainWindow,Ui_MainWindow):
         else:
             self.f.Layout = QGridLayout(getattr(self,'groupBox_'+str(n)))
             getattr(self,'groupBox_'+str(n)).setTitle(title)
-        self.f.Layout.addWidget(self.f)
+        self.f.Layout.addWidget(self.f.canvas)
         print('画板放上去了')
-    def figure_close(self):
-        try:
-            self.f.fig.delaxes(self.f.ax)
-            self.f.Layout.removeWidget(self.f)
-        except:
-            pass
 #定义画板并构造绘制函数
-class fig_Canvas(FigureCanvas):
+class fig_Canvas():
     def __init__(self):
         #self.fig = Figure(figsize = (39,27),dpi=100)
-        self.fig = Figure()
-        self.fig.set_tight_layout(True)
-        super().__init__(self.fig)
-        #self.fig.canvas.draw()
+        self.fig = plt.figure()
+        self.canvas = FigureCanvas(self.fig)
     # 在画板上画图
     def draw_data(self,para_x,para_y):
-        self.ax = self.fig.add_subplot(111)
-        self.ax.grid(True)
+        ax = self.fig.add_axes([0.08, 0.15, 0.9, 0.8])
+        ax.clear()
         x = globals()['para'+str(para_x)]
         y = globals()['para'+str(para_y)]
-        self.ax.plot(x,y)
-        #self.flush_events()
+        ax.plot(x,y)
+        ax.grid(True)
+        self.canvas.draw()
         print('画好了')
 
 #定义打开csv文件的类
