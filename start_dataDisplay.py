@@ -14,41 +14,63 @@ class curve_Display(QMainWindow,Ui_MainWindow):
         self.setupUi(self)
         for k,v in index_dic.items():
             self.comboBox.addItem(k)
+            self.comboBox_2.addItem(k)
+            self.comboBox_3.addItem(k)
+            self.comboBox_4.addItem(k)
             self.comboBox.setItemText(v, QtCore.QCoreApplication.translate("MainWindow", k))
-        self.comboBox.currentIndexChanged.connect(self.changeFigure)
-    def changeFigure(self):
-        index_now = index_dic[self.comboBox.currentText()]
-        return self.display(1,7,index_now,self.comboBox.currentText())
+            self.comboBox_2.setItemText(v, QtCore.QCoreApplication.translate("MainWindow", k))
+            self.comboBox_3.setItemText(v, QtCore.QCoreApplication.translate("MainWindow", k))
+            self.comboBox_4.setItemText(v, QtCore.QCoreApplication.translate("MainWindow", k))
+        self.comboBox.currentIndexChanged.connect(lambda:self.display(1,7,index_dic[
+            self.comboBox.currentText()],self.comboBox.currentText()))
+        self.comboBox_2.currentIndexChanged.connect(lambda:self.display(2,7,index_dic[
+            self.comboBox_2.currentText()],self.comboBox_2.currentText()))
+        self.comboBox_3.currentIndexChanged.connect(lambda: self.display(3, 7, index_dic[
+            self.comboBox_3.currentText()], self.comboBox_3.currentText()))
+        self.comboBox_4.currentIndexChanged.connect(lambda: self.display(4, 7, index_dic[
+            self.comboBox_4.currentText()], self.comboBox_4.currentText()))
+    def changeFigure(self,index):
+        index_now = index_dic[index]
+        return self.display(1,7,index_now,index)
     def draw_joint_data(self,index):
         title = self.comboBox.currentText()
         for i in range(1,5):
             self.display(i,7,index+3*(i-1),title)
     def display(self,n,para_x,para_y,title):
+        self.figure_close()
         self.f = fig_Canvas()
         self.f.draw_data(para_x,para_y)
         if n == 1:
             self.f.Layout = QGridLayout(self.groupBox)
             self.groupBox.setTitle(title)
         else:
-            getattr(self,'groupBox_'+str(n)).destroy()
             self.f.Layout = QGridLayout(getattr(self,'groupBox_'+str(n)))
+            getattr(self,'groupBox_'+str(n)).setTitle(title)
         self.f.Layout.addWidget(self.f)
-
+        print('画板放上去了')
+    def figure_close(self):
+        try:
+            self.f.fig.delaxes(self.f.ax)
+            self.f.Layout.removeWidget(self.f)
+        except:
+            pass
 #定义画板并构造绘制函数
 class fig_Canvas(FigureCanvas):
     def __init__(self):
         #self.fig = Figure(figsize = (39,27),dpi=100)
-        self.fig = plt.figure()
+        self.fig = Figure()
         self.fig.set_tight_layout(True)
-        plt.grid(True)
         super().__init__(self.fig)
-        self.ax = self.fig.add_subplot(111)
+        #self.fig.canvas.draw()
     # 在画板上画图
     def draw_data(self,para_x,para_y):
+        self.ax = self.fig.add_subplot(111)
+        self.ax.grid(True)
         x = globals()['para'+str(para_x)]
         y = globals()['para'+str(para_y)]
-        self.ax.plot(x, y)
-        plt.close(self.fig)
+        self.ax.plot(x,y)
+        #self.flush_events()
+        print('画好了')
 
 #定义打开csv文件的类
 class OpenFile():
