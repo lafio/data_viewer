@@ -38,10 +38,10 @@ class curve_Display(QMainWindow,Ui_MainWindow):
             self.comboBox.currentText()],self.comboBox.currentText()))
         self.comboBox_2.currentIndexChanged.connect(lambda:self.display(2,7,index_dic[
             self.comboBox_2.currentText()],self.comboBox_2.currentText()))
-        self.comboBox_3.currentIndexChanged.connect(lambda: self.display(3, 7, index_dic[
-            self.comboBox_3.currentText()], self.comboBox_3.currentText()))
-        self.comboBox_4.currentIndexChanged.connect(lambda: self.display(4, 7, index_dic[
-            self.comboBox_4.currentText()], self.comboBox_4.currentText()))
+        self.comboBox_3.currentIndexChanged.connect(lambda:self.display(3,7,index_dic[
+            self.comboBox_3.currentText()],self.comboBox_3.currentText()))
+        self.comboBox_4.currentIndexChanged.connect(lambda:self.display(4,7,index_dic[
+            self.comboBox_4.currentText()],self.comboBox_4.currentText()))
         #调用一次draw_data以确认ax-limit
         self.f1.draw_data(7,8)
         self.limit = np.array(self.f1.ax.get_xlim()+self.f1.ax.get_ylim())
@@ -49,6 +49,7 @@ class curve_Display(QMainWindow,Ui_MainWindow):
         self.scroll = self.horizontalScrollBar
         self.step = 0.1
         self.setupSlider()
+        self.draw_knee_torque()
     #scrollbar
     def setupSlider(self):
         self.lims = np.array(self.f1.ax.get_xlim())
@@ -75,10 +76,11 @@ class curve_Display(QMainWindow,Ui_MainWindow):
         index_now = index_dic[index]
         return self.display(1,7,index_now,index)
     #绘制关节数据，暂时弃用
-    def draw_joint_data(self,index):
-        title = self.comboBox.currentText()
-        for i in range(1,5):
-            self.display(i,7,index+3*(i-1),title)
+    def draw_knee_torque(self):
+        self.comboBox.setCurrentIndex(48)
+        self.comboBox_2.setCurrentIndex(51)
+        self.comboBox_3.setCurrentIndex(54)
+        self.comboBox_4.setCurrentIndex(57)
     #display()，被comboBox作为槽函数调用，以改变画板上的图像
     def display(self,n,para_x,para_y,title):
         f = getattr(self,'f'+str(n))
