@@ -47,9 +47,41 @@ class curve_Display(QMainWindow,Ui_MainWindow):
         self.limit = np.array(self.f1.ax.get_xlim()+self.f1.ax.get_ylim())
         #设定scrollBar
         self.scroll = self.horizontalScrollBar
-        self.step = 0.1
+        self.step = self.doubleSpinBox.value()
+        self.doubleSpinBox.valueChanged.connect(self.getSpinValue)
         self.setupSlider()
-        self.draw_knee_torque()
+        #9个radioButton设定槽函数
+        self.Knee.toggled.connect(self.radioButtonState)
+        self.HipX.toggled.connect(self.radioButtonState)
+        self.HipY.toggled.connect(self.radioButtonState)
+        self.Torque.toggled.connect(self.radioButtonState)
+        self.Angle.toggled.connect(self.radioButtonState)
+        self.Velocity.toggled.connect(self.radioButtonState)
+        self.drive_Temperature.toggled.connect(self.radioButtonState)
+        self.drive_Voltage.toggled.connect(self.radioButtonState)
+        self.moto_Temperature.toggled.connect(self.radioButtonState)
+    #radioButton的槽函数，根据button的不同对应不同的绘图对象
+    def radioButtonState(self):
+        if self.HipX.isChecked() and self.Angle.isChecked():
+            self.draw4Figure(22,25,28,31)
+        elif self.HipY.isChecked() and self.Angle.isChecked():
+            self.draw4Figure(23,26,29,32)
+        elif self.Knee.isChecked() and self.Angle.isChecked():
+            self.draw4Figure(24,27,30,33)
+        elif self.HipX.isChecked() and self.Velocity.isChecked():
+            self.draw4Figure(34,37,40,43)
+        elif self.HipY.isChecked() and self.Velocity.isChecked():
+            self.draw4Figure(35,38,41,44)
+        elif self.Knee.isChecked() and self.Velocity.isChecked():
+            self.draw4Figure(36,39,42,45)
+        elif self.HipX.isChecked() and self.Torque.isChecked():
+            self.draw4Figure(46,49,52,55)
+        elif self.HipY.isChecked() and self.Torque.isChecked():
+            self.draw4Figure(47,50,53,56)
+        elif self.Knee.isChecked() and self.Torque.isChecked():
+            self.draw4Figure(48,51,54,57)
+    def getSpinValue(self):
+        self.step=self.doubleSpinBox.value()
     #scrollbar
     def setupSlider(self):
         self.lims = np.array(self.f1.ax.get_xlim())
@@ -75,12 +107,12 @@ class curve_Display(QMainWindow,Ui_MainWindow):
     def changeFigure(self,index):
         index_now = index_dic[index]
         return self.display(1,7,index_now,index)
-    #绘制关节数据，暂时弃用
-    def draw_knee_torque(self):
-        self.comboBox.setCurrentIndex(48)
-        self.comboBox_2.setCurrentIndex(51)
-        self.comboBox_3.setCurrentIndex(54)
-        self.comboBox_4.setCurrentIndex(57)
+    #绘制关节数据
+    def draw4Figure(self,fl,fr,hl,hr):
+        self.comboBox.setCurrentIndex(fl)
+        self.comboBox_2.setCurrentIndex(fr)
+        self.comboBox_3.setCurrentIndex(hl)
+        self.comboBox_4.setCurrentIndex(hr)
     #display()，被comboBox作为槽函数调用，以改变画板上的图像
     def display(self,n,para_x,para_y,title):
         f = getattr(self,'f'+str(n))
@@ -105,7 +137,8 @@ class fig_Canvas():
         self.ax.clear()
         x = globals()['para'+str(para_x)]
         y = globals()['para'+str(para_y)]
-        self.ax.plot(x,y)
+        #self.ax.plot(x,y)
+        self.ax.scatter(x,y,s=5)
         self.ax.grid(True)
         self.canvas.draw()
         print('画好了')
