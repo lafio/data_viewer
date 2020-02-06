@@ -59,27 +59,48 @@ class curve_Display(QMainWindow,Ui_MainWindow):
         self.Velocity.toggled.connect(self.radioButtonState)
         self.drive_Temperature.toggled.connect(self.radioButtonState)
         self.drive_Voltage.toggled.connect(self.radioButtonState)
-        self.moto_Temperature.toggled.connect(self.radioButtonState)
+        self.motor_Temperature.toggled.connect(self.radioButtonState)
     #radioButton的槽函数，根据button的不同对应不同的绘图对象
     def radioButtonState(self):
-        if self.HipX.isChecked() and self.Angle.isChecked():
-            self.draw4Figure(22,25,28,31)
-        elif self.HipY.isChecked() and self.Angle.isChecked():
-            self.draw4Figure(23,26,29,32)
-        elif self.Knee.isChecked() and self.Angle.isChecked():
-            self.draw4Figure(24,27,30,33)
-        elif self.HipX.isChecked() and self.Velocity.isChecked():
-            self.draw4Figure(34,37,40,43)
-        elif self.HipY.isChecked() and self.Velocity.isChecked():
-            self.draw4Figure(35,38,41,44)
-        elif self.Knee.isChecked() and self.Velocity.isChecked():
-            self.draw4Figure(36,39,42,45)
-        elif self.HipX.isChecked() and self.Torque.isChecked():
-            self.draw4Figure(46,49,52,55)
-        elif self.HipY.isChecked() and self.Torque.isChecked():
-            self.draw4Figure(47,50,53,56)
-        elif self.Knee.isChecked() and self.Torque.isChecked():
-            self.draw4Figure(48,51,54,57)
+        if self.HipX.isChecked():
+            if self.Angle.isChecked():
+                self.draw4Figure(22,25,28,31)
+            elif self.Velocity.isChecked():
+                self.draw4Figure(34,37,40,43)
+            elif self.Torque.isChecked():
+                self.draw4Figure(46,49,52,55)
+            elif self.drive_Temperature.isChecked():
+                self.draw4Figure(256,259,262,265)
+            elif self.drive_Voltage.isChecked():
+                self.draw4Figure(244,247,250,253)
+            elif self.motor_Temperature.isChecked():
+                self.draw4Figure(269,272,275,278)
+        elif self.HipY.isChecked():
+            if self.Angle.isChecked():
+                self.draw4Figure(23,26,29,32)
+            elif self.Velocity.isChecked():
+                self.draw4Figure(35,38,41,44)
+            elif self.Torque.isChecked():
+                self.draw4Figure(47,50,53,56)
+            elif self.drive_Temperature.isChecked():
+                self.draw4Figure(257,260,263,266)
+            elif self.drive_Voltage.isChecked():
+                self.draw4Figure(245,248,251,254)
+            elif self.motor_Temperature.isChecked():
+                self.draw4Figure(270,273,276,279)
+        elif self.Knee.isChecked():
+            if self.Angle.isChecked():
+                self.draw4Figure(24,27,30,33)
+            elif self.Velocity.isChecked():
+                self.draw4Figure(36,39,42,45)
+            elif self.Torque.isChecked():
+                self.draw4Figure(48,51,54,57)
+            elif self.drive_Temperature.isChecked():
+                self.draw4Figure(258,261,264,267)
+            elif self.drive_Voltage.isChecked():
+                self.draw4Figure(246,249,252,255)
+            elif self.motor_Temperature.isChecked():
+                self.draw4Figure(271,274,277,280)
     def getSpinValue(self):
         self.step=self.doubleSpinBox.value()
     #scrollbar
