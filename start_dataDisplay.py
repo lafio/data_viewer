@@ -42,8 +42,8 @@ class curve_Display(QMainWindow,Ui_MainWindow):
             self.comboBox_3.currentText()],self.comboBox_3.currentText()))
         self.comboBox_4.currentIndexChanged.connect(lambda:self.display(4,7,index_dic[
             self.comboBox_4.currentText()],self.comboBox_4.currentText()))
-        #调用一次draw_data以确认ax-limit
-        self.f1.draw_data(7,8)
+        #调用一次draw_data以确认ax-limit,同时默认打开4个Knee-Torque
+        self.draw4Figure(48,51,54,57)
         self.limit = np.array(self.f1.ax.get_xlim()+self.f1.ax.get_ylim())
         #设定scrollBar
         self.scroll = self.horizontalScrollBar
@@ -134,10 +134,15 @@ class curve_Display(QMainWindow,Ui_MainWindow):
         self.comboBox_2.setCurrentIndex(fr)
         self.comboBox_3.setCurrentIndex(hl)
         self.comboBox_4.setCurrentIndex(hr)
+        if fl >= 22 and hr <= 57:
+            self.comboBox.setCurrentIndex(fl+36)
+            self.comboBox_2.setCurrentIndex(fr+36)
+            self.comboBox_3.setCurrentIndex(hl+36)
+            self.comboBox_4.setCurrentIndex(hr+36)
     #display()，被comboBox作为槽函数调用，以改变画板上的图像
     def display(self,n,para_x,para_y,title):
         f = getattr(self,'f'+str(n))
-        f.draw_data(para_x,para_y)
+        f.draw_data(para_x,para_y,title)
         f.Layout = getattr(self,'Layout'+str(n))
         if n == 1:
             self.groupBox.setTitle(title)
@@ -153,13 +158,18 @@ class fig_Canvas():
         self.fig = plt.figure()
         self.canvas = FigureCanvas(self.fig)
         self.ax = self.fig.add_axes([0.08, 0.15, 0.9, 0.8])
+        self.num = 0
     # 在画板上画图
-    def draw_data(self,para_x,para_y):
-        self.ax.clear()
+    def draw_data(self,para_x,para_y,title):
+        self.num += 1
+        if self.num > 2:
+            self.num = 1
+            self.ax.clear()
         x = globals()['para'+str(para_x)]
         y = globals()['para'+str(para_y)]
-        #self.ax.plot(x,y)
-        self.ax.scatter(x,y,s=5)
+        self.ax.plot(x,y,label = title)
+        #self.ax.scatter(x,y,s=5)
+        self.ax.legend(loc = 'upper right')
         self.ax.grid(True)
         self.canvas.draw()
         print('画好了')
