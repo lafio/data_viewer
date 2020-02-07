@@ -5,7 +5,7 @@ from PyQt5 import QtCore,QtWidgets
 from PyQt5.QtWidgets import QApplication,QMainWindow,QGridLayout,QFileDialog
 from matplotlib import pyplot as plt
 from matplotlib.backends.backend_qt5agg import FigureCanvasQTAgg as FigureCanvas
-
+import index
 #在mainwindow绘制曲线并添加到gridlayout
 class curve_Display(QMainWindow,Ui_MainWindow):
     def __init__(self,index_dic):
@@ -204,11 +204,16 @@ class OpenFile():
 #对于给定字典，输入值返回对应的键
 def get_key(dic,value):
     return [k for k,v in dic.items() if v == value][0]
+def write_index(index_dic):
+    with open('index.py','w') as f:
+        f.write(str(index_dic))
 if __name__ == '__main__':
     app = QApplication(sys.argv)#实例化一个QApplication
     filename, filetype = QFileDialog.getOpenFileName()#读取文件，将文件路径存储到filename中
     openfile = OpenFile(filename)#实例化一个OpenFile，并打开filename
-    index_dic = openfile.open_file_index()#导入索引，存储到index_dic中
+    #index_dic = openfile.open_file_index()#导入索引，存储到index_dic中
+    #write_index(index_dic) #将index.csv中的索引以字典形式写到index.py中，便于打包程序时不包含index.csv文件
+    index_dic = index.get_index_dic()#从index.py中获得索引字典，需要运行一次以上注释掉的两行
     ui = curve_Display(index_dic)#实例化一个curve_Display并运行所有初始化函数
     ui.show()
     sys.exit(app.exec())
