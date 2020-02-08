@@ -13,7 +13,7 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
-        MainWindow.resize(1587, 907)
+        MainWindow.resize(1587, 951)
         self.centralwidget = QtWidgets.QWidget(MainWindow)
         self.centralwidget.setObjectName("centralwidget")
         self.groupBox = QtWidgets.QGroupBox(self.centralwidget)
@@ -87,7 +87,7 @@ class Ui_MainWindow(object):
         self.comboBox_4.setObjectName("comboBox_4")
         self.comboBox_4.addItem("")
         self.horizontalScrollBar = QtWidgets.QScrollBar(self.centralwidget)
-        self.horizontalScrollBar.setGeometry(QtCore.QRect(10, 840, 1205, 16))
+        self.horizontalScrollBar.setGeometry(QtCore.QRect(10, 830, 1205, 16))
         self.horizontalScrollBar.setOrientation(QtCore.Qt.Horizontal)
         self.horizontalScrollBar.setObjectName("horizontalScrollBar")
         self.comboBox_3 = QtWidgets.QComboBox(self.centralwidget)
@@ -215,10 +215,6 @@ class Ui_MainWindow(object):
         self.drive_Voltage.setObjectName("drive_Voltage")
         self.gridLayout_2.addWidget(self.drive_Voltage, 2, 1, 1, 1)
         MainWindow.setCentralWidget(self.centralwidget)
-        self.menubar = QtWidgets.QMenuBar(MainWindow)
-        self.menubar.setGeometry(QtCore.QRect(0, 0, 1587, 23))
-        self.menubar.setObjectName("menubar")
-        MainWindow.setMenuBar(self.menubar)
         self.statusbar = QtWidgets.QStatusBar(MainWindow)
         self.statusbar.setObjectName("statusbar")
         MainWindow.setStatusBar(self.statusbar)
