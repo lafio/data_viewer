@@ -87,7 +87,7 @@ class Ui_MainWindow(object):
         self.comboBox_4.setObjectName("comboBox_4")
         self.comboBox_4.addItem("")
         self.horizontalScrollBar = QtWidgets.QScrollBar(self.centralwidget)
-        self.horizontalScrollBar.setGeometry(QtCore.QRect(10, 830, 1205, 16))
+        self.horizontalScrollBar.setGeometry(QtCore.QRect(10, 830, 1205, 25))
         self.horizontalScrollBar.setOrientation(QtCore.Qt.Horizontal)
         self.horizontalScrollBar.setObjectName("horizontalScrollBar")
         self.comboBox_3 = QtWidgets.QComboBox(self.centralwidget)

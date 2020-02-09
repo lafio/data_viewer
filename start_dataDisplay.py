@@ -19,12 +19,12 @@ class curve_Display(QMainWindow,Ui_MainWindow):
         self.f2 = fig_Canvas()
         self.f3 = fig_Canvas()
         self.f4 = fig_Canvas()
-        self.addToolBar(NavigationToolbar(self.f1.canvas, self))
+        """self.addToolBar(NavigationToolbar(self.f1.canvas, self))
         self.addToolBar(NavigationToolbar(self.f2.canvas, self))
         self.addToolBar(QtCore.Qt.BottomToolBarArea,
                         NavigationToolbar(self.f3.canvas, self))
         self.addToolBar(QtCore.Qt.BottomToolBarArea,
-                        NavigationToolbar(self.f4.canvas, self))
+                        NavigationToolbar(self.f4.canvas, self))"""
         self.Layout1 = QGridLayout(self.groupBox)
         self.Layout2 = QGridLayout(self.groupBox_2)
         self.Layout3 = QGridLayout(self.groupBox_3)
