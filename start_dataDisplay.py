@@ -171,8 +171,8 @@ class fig_Canvas():
         if self.num > 2:
             self.num = 1
             self.ax.clear()
-        x = globals()['para'+str(para_x)]
-        y = globals()['para'+str(para_y)]
+        x = data_dic[para_x]
+        y = data_dic[para_y]
         self.ax.plot(x,y,label = title)
         #self.ax.scatter(x,y,s=5)
         self.ax.legend(loc = 'upper right')
@@ -181,8 +181,6 @@ class fig_Canvas():
         print('画好了')
 #定义打开csv文件的类
 class OpenFile():
-    def __init__(self,filename):
-        self.open_file_data(filename)
     # 读取index.csv 文件，获得data的索引
     def open_file_index(self):
         with open('index.csv') as f:
@@ -199,14 +197,18 @@ class OpenFile():
         with open(filename) as f:
             reader = csv.reader(f)
             header_row = next(reader)
+            header_row = next(reader)
+            data_dic = {}
             for i in range(285):  # 285
-                globals()['para' + str(i)] = []
+                locals()['para' + str(i)] = []
             for row in reader:
                 try:
                     for i in range(285):  # 285
-                        globals()['para' + str(i)].append(float(row[i]))
+                        locals()['para' + str(i)].append(float(row[i]))
+                        data_dic[i] = locals()['para'+str(i)]
                 except:
                     continue
+            return data_dic
 #对于给定字典，输入值返回对应的键
 def get_key(dic,value):
     return [k for k,v in dic.items() if v == value][0]
@@ -216,10 +218,11 @@ def write_index(index_dic):
 if __name__ == '__main__':
     app = QApplication(sys.argv)#实例化一个QApplication
     filename, filetype = QFileDialog.getOpenFileName()#读取文件，将文件路径存储到filename中
-    openfile = OpenFile(filename)#实例化一个OpenFile，并打开filename
+    openfile = OpenFile()#实例化一个OpenFile，并打开filename
     #index_dic = openfile.open_file_index()#导入索引，存储到index_dic中
     #write_index(index_dic) #将index.csv中的索引以字典形式写到index.py中，便于打包程序时不包含index.csv文件
     index_dic = index.get_index_dic()#从index.py中获得索引字典，需要运行一次以上注释掉的两行
+    data_dic = openfile.open_file_data(filename)
     ui = curve_Display(index_dic)#实例化一个curve_Display并运行所有初始化函数
     ui.show()
     sys.exit(app.exec())
