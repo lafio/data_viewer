@@ -1,5 +1,6 @@
-import sys,csv
+import sys
 import numpy as np
+from open_file import OpenFile
 from dataDisplay import Ui_MainWindow
 from PyQt5 import QtCore,QtWidgets
 from PyQt5.QtWidgets import QApplication,QMainWindow,QGridLayout,QFileDialog
@@ -179,48 +180,17 @@ class fig_Canvas():
         self.ax.grid(True)
         self.canvas.draw()
         print('画好了')
-#定义打开csv文件的类
-class OpenFile():
-    # 读取index.csv 文件，获得data的索引
-    def open_file_index(self):
-        with open('index.csv') as f:
-            reader = csv.reader(f)
-            index_dic = {},
-            dic_key,dic_value = [],[]
-            for row in reader:
-                dic_key.append(row[2])
-                dic_value.append(int(row[0].strip()))
-            index_dic = dict(zip(dic_key,dic_value))
-        return index_dic
-    # 读取csv_data文件，append到285个作为全局变量的list
-    def open_file_data(self,filename):
-        with open(filename) as f:
-            reader = csv.reader(f)
-            header_row = next(reader)
-            header_row = next(reader)
-            data_dic = {}
-            for i in range(285):  # 285
-                locals()['para' + str(i)] = []
-            for row in reader:
-                try:
-                    for i in range(285):  # 285
-                        locals()['para' + str(i)].append(float(row[i]))
-                        data_dic[i] = locals()['para'+str(i)]
-                except:
-                    continue
-            return data_dic
+
 #对于给定字典，输入值返回对应的键
 def get_key(dic,value):
     return [k for k,v in dic.items() if v == value][0]
-def write_index(index_dic):
-    with open('index.py','w') as f:
-        f.write(str(index_dic))
+
 if __name__ == '__main__':
     app = QApplication(sys.argv)#实例化一个QApplication
     filename, filetype = QFileDialog.getOpenFileName()#读取文件，将文件路径存储到filename中
     openfile = OpenFile()#实例化一个OpenFile，并打开filename
     #index_dic = openfile.open_file_index()#导入索引，存储到index_dic中
-    #write_index(index_dic) #将index.csv中的索引以字典形式写到index.py中，便于打包程序时不包含index.csv文件
+    #openfile.write_index(index_dic) #将index.csv中的索引以字典形式写到index.py中，便于打包程序时不包含index.csv文件
     index_dic = index.get_index_dic()#从index.py中获得索引字典，需要运行一次以上注释掉的两行
     data_dic = openfile.open_file_data(filename)
     ui = curve_Display(index_dic)#实例化一个curve_Display并运行所有初始化函数
