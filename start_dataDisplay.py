@@ -164,7 +164,8 @@ class fig_Canvas():
         #plt.cla()
         self.fig = plt.figure()
         self.canvas = FigureCanvas(self.fig)
-        self.ax = self.fig.add_axes([0.08, 0.15, 0.9, 0.8])
+        #self.ax = self.fig.add_axes([0.08, 0.15, 0.9, 0.8])
+        self.ax = self.fig.add_subplot(111)
         self.num = 0
     # 在画板上画图
     def draw_data(self,para_x,para_y,title):
