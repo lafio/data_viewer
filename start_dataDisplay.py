@@ -20,12 +20,12 @@ class curve_Display(QMainWindow,Ui_MainWindow):
         self.f2 = fig_Canvas()
         self.f3 = fig_Canvas()
         self.f4 = fig_Canvas()
-        """self.addToolBar(NavigationToolbar(self.f1.canvas, self))
+        self.addToolBar(NavigationToolbar(self.f1.canvas, self))
         self.addToolBar(NavigationToolbar(self.f2.canvas, self))
         self.addToolBar(QtCore.Qt.BottomToolBarArea,
                         NavigationToolbar(self.f3.canvas, self))
         self.addToolBar(QtCore.Qt.BottomToolBarArea,
-                        NavigationToolbar(self.f4.canvas, self))"""
+                        NavigationToolbar(self.f4.canvas, self))
         self.Layout1 = QGridLayout(self.groupBox)
         self.Layout2 = QGridLayout(self.groupBox_2)
         self.Layout3 = QGridLayout(self.groupBox_3)
@@ -52,10 +52,11 @@ class curve_Display(QMainWindow,Ui_MainWindow):
         #调用一次draw_data以确认ax-limit,同时默认打开4个Knee-Torque
         self.draw4Figure(48,51,54,57)
         self.limit = np.array(self.f1.ax.get_xlim()+self.f1.ax.get_ylim())
-        #设定scrollBar
+        #设定scrollBar等
         self.scroll = self.horizontalScrollBar
         self.step = self.doubleSpinBox.value()
-        self.doubleSpinBox.valueChanged.connect(self.getSpinValue)
+        self.doubleSpinBox.valueChanged.connect(self.getDoubleSpinValue)
+        self.spinBox.valueChanged.connect(self.getSpinValue)
         self.setupSlider()
         #9个radioButton设定槽函数
         self.Knee.toggled.connect(self.radioButtonState)
@@ -67,6 +68,9 @@ class curve_Display(QMainWindow,Ui_MainWindow):
         self.drive_Temperature.toggled.connect(self.radioButtonState)
         self.drive_Voltage.toggled.connect(self.radioButtonState)
         self.motor_Temperature.toggled.connect(self.radioButtonState)
+        self.imu_angle.toggled.connect(self.radioButtonState2)
+        self.imu_velocity.toggled.connect(self.radioButtonState2)
+        self.imu_acc.toggled.connect(self.radioButtonState2)
     #radioButton的槽函数，根据button的不同对应不同的绘图对象
     def radioButtonState(self):
         if self.HipX.isChecked():
@@ -108,7 +112,19 @@ class curve_Display(QMainWindow,Ui_MainWindow):
                 self.draw4Figure(246,249,252,255)
             elif self.motor_Temperature.isChecked():
                 self.draw4Figure(271,274,277,280)
+    def radioButtonState2(self):
+        if self.imu_angle.isChecked():
+            self.draw3Figure(8,9,10)
+        elif self.imu_velocity.isChecked():
+            self.draw3Figure(11,12,13)
+        elif self.imu_acc.isChecked():
+            self.draw3Figure(14,15,16)
     def getSpinValue(self):
+        self.f1.num_limit = self.spinBox.value()
+        self.f2.num_limit = self.spinBox.value()
+        self.f3.num_limit = self.spinBox.value()
+        self.f4.num_limit = self.spinBox.value()
+    def getDoubleSpinValue(self):
         self.step=self.doubleSpinBox.value()
     #scrollbar
     def setupSlider(self):
@@ -146,6 +162,11 @@ class curve_Display(QMainWindow,Ui_MainWindow):
             self.comboBox_2.setCurrentIndex(fr+36)
             self.comboBox_3.setCurrentIndex(hl+36)
             self.comboBox_4.setCurrentIndex(hr+36)
+    #绘制陀螺仪数据
+    def draw3Figure(self,x,y,z):
+        self.comboBox.setCurrentIndex(x)
+        self.comboBox_2.setCurrentIndex(y)
+        self.comboBox_3.setCurrentIndex(z)
     #display()，被comboBox作为槽函数调用，以改变画板上的图像
     def display(self,n,para_x,para_y,title):
         f = getattr(self,'f'+str(n))
@@ -167,12 +188,13 @@ class fig_Canvas():
         #self.ax = self.fig.add_axes([0.08, 0.15, 0.9, 0.8])
         self.ax = self.fig.add_subplot(111)
         self.num = 0
+        self.num_limit = 2
     # 在画板上画图
     def draw_data(self,para_x,para_y,title):
         self.num += 1
-        if self.num > 2:
-            self.num = 1
+        if self.num > self.num_limit:
             self.ax.clear()
+            self.num = 1
         x = data_dic[para_x]
         y = data_dic[para_y]
         self.ax.plot(x,y,label = title)
