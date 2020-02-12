@@ -58,7 +58,10 @@ class curve_Display(QMainWindow,Ui_MainWindow):
         self.doubleSpinBox.valueChanged.connect(self.getDoubleSpinValue)
         self.spinBox.valueChanged.connect(self.getSpinValue)
         self.setupSlider()
-        #9个radioButton设定槽函数
+        # 设定scope绘制策略
+        self.scope.valueChanged.connect(lambda: self.draw4Figure(self.scope.value() + 94, self.scope.value() + 95,
+                                                                 self.scope.value() + 96, self.scope.value() + 97))
+        #16个radioButton设定槽函数
         self.Knee.toggled.connect(self.radioButtonState)
         self.HipX.toggled.connect(self.radioButtonState)
         self.HipY.toggled.connect(self.radioButtonState)
@@ -71,6 +74,10 @@ class curve_Display(QMainWindow,Ui_MainWindow):
         self.imu_angle.toggled.connect(self.radioButtonState2)
         self.imu_velocity.toggled.connect(self.radioButtonState2)
         self.imu_acc.toggled.connect(self.radioButtonState2)
+        self.cost_time.toggled.connect(lambda:self.draw4Figure(1,1,1,1))
+        self.alg_time.toggled.connect(lambda:self.draw4Figure(2,2,2,2))
+        self.ecat_time.toggled.connect(lambda:self.draw4Figure(3,4,5,6))
+        self.cpu_rate.toggled.connect(lambda:self.draw4Figure(6,6,6,6))
     #radioButton的槽函数，根据button的不同对应不同的绘图对象
     def radioButtonState(self):
         if self.HipX.isChecked():
