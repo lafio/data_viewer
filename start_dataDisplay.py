@@ -49,15 +49,13 @@ class curve_Display(QMainWindow,Ui_MainWindow):
             self.comboBox_3.currentText()],self.comboBox_3.currentText()))
         self.comboBox_4.currentIndexChanged.connect(lambda:self.display(4,7,index_dic[
             self.comboBox_4.currentText()],self.comboBox_4.currentText()))
-        #调用一次draw_data以确认ax-limit,同时默认打开4个Knee-Torque
-        self.draw4Figure(48,51,54,57)
-        self.limit = np.array(self.f1.ax.get_xlim()+self.f1.ax.get_ylim())
         #设定scrollBar等
+        #self.limit = np.array(self.f1.ax.get_xlim() + self.f1.ax.get_ylim())
         self.scroll = self.horizontalScrollBar
         self.step = self.doubleSpinBox.value()
         self.doubleSpinBox.valueChanged.connect(self.getDoubleSpinValue)
         self.spinBox.valueChanged.connect(self.getSpinValue)
-        self.setupSlider()
+        #self.get_data_dic()
         # 设定scope绘制策略
         self.scope.valueChanged.connect(lambda: self.draw4Figure(self.scope.value() + 94, self.scope.value() + 95,
                                                                  self.scope.value() + 96, self.scope.value() + 97))
@@ -78,6 +76,7 @@ class curve_Display(QMainWindow,Ui_MainWindow):
         self.alg_time.toggled.connect(lambda:self.draw4Figure(2,2,2,2))
         self.ecat_time.toggled.connect(lambda:self.draw4Figure(3,4,5,6))
         self.cpu_rate.toggled.connect(lambda:self.draw4Figure(6,6,6,6))
+        self.open_btn.clicked.connect(self.get_data_dic)
     #radioButton的槽函数，根据button的不同对应不同的绘图对象
     def radioButtonState(self):
         if self.HipX.isChecked():
@@ -177,7 +176,7 @@ class curve_Display(QMainWindow,Ui_MainWindow):
     #display()，被comboBox作为槽函数调用，以改变画板上的图像
     def display(self,n,para_x,para_y,title):
         f = getattr(self,'f'+str(n))
-        f.draw_data(para_x,para_y,title)
+        f.draw_data(self.data_dic[para_x],self.data_dic[para_y],title)
         f.Layout = getattr(self,'Layout'+str(n))
         if n == 1:
             self.groupBox.setTitle(title)
@@ -185,6 +184,14 @@ class curve_Display(QMainWindow,Ui_MainWindow):
             getattr(self,'groupBox_'+str(n)).setTitle(title)
         f.Layout.addWidget(f.canvas)
         print('画板放上去了')
+    def get_data_dic(self):
+        # 打开数据csv
+        filename, filetype = QFileDialog.getOpenFileName()  # 读取文件，将文件路径存储到filename中
+        openfile = OpenFile()  # 实例化一个OpenFile，并打开filename
+        self.data_dic = openfile.open_file_data(filename)
+        # 调用一次draw_data以确认ax-limit,同时默认打开4个Knee-Torque
+        self.draw4Figure(48, 51, 54, 57)
+        self.setupSlider()
 #定义画板并构造绘制函数
 class fig_Canvas():
     def __init__(self):
@@ -197,13 +204,11 @@ class fig_Canvas():
         self.num = 0
         self.num_limit = 2
     # 在画板上画图
-    def draw_data(self,para_x,para_y,title):
+    def draw_data(self,x,y,title):
         self.num += 1
         if self.num > self.num_limit:
             self.ax.clear()
             self.num = 1
-        x = data_dic[para_x]
-        y = data_dic[para_y]
         self.ax.plot(x,y,label = title)
         #self.ax.scatter(x,y,s=5)
         self.ax.legend(loc = 'upper right')
@@ -217,12 +222,9 @@ def get_key(dic,value):
 
 if __name__ == '__main__':
     app = QApplication(sys.argv)#实例化一个QApplication
-    filename, filetype = QFileDialog.getOpenFileName()#读取文件，将文件路径存储到filename中
-    openfile = OpenFile()#实例化一个OpenFile，并打开filename
     #index_dic = openfile.open_file_index()#导入索引，存储到index_dic中
     #openfile.write_index(index_dic) #将index.csv中的索引以字典形式写到index.py中，便于打包程序时不包含index.csv文件
     index_dic = index.get_index_dic()#从index.py中获得索引字典，需要运行一次以上注释掉的两行
-    data_dic = openfile.open_file_data(filename)
     ui = curve_Display(index_dic)#实例化一个curve_Display并运行所有初始化函数
     ui.show()
     sys.exit(app.exec())
