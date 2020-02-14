@@ -13,7 +13,7 @@ class OpenFile():
             index_dic = dict(zip(dic_key,dic_value))
         return index_dic
     # 将字典index_dic写入到index.py中
-    def write_index(index_dic):
+    def write_index(self,index_dic):
         with open('index.py', 'w') as f:
             f.write(str(index_dic))
     # 读取csv_data文件，append到285个作为全局变量的list

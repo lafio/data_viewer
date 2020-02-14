@@ -7,6 +7,7 @@ from PyQt5.QtWidgets import QApplication,QMainWindow,QGridLayout,QFileDialog
 from matplotlib import pyplot as plt
 from matplotlib.backends.backend_qt5agg import FigureCanvasQTAgg as FigureCanvas,NavigationToolbar2QT as NavigationToolbar
 import index
+
 #在mainwindow绘制曲线并添加到gridlayout
 class curve_Display(QMainWindow,Ui_MainWindow):
     def __init__(self,index_dic):
@@ -20,12 +21,10 @@ class curve_Display(QMainWindow,Ui_MainWindow):
         self.f2 = fig_Canvas()
         self.f3 = fig_Canvas()
         self.f4 = fig_Canvas()
-        self.addToolBar(NavigationToolbar(self.f1.canvas, self))
-        self.addToolBar(NavigationToolbar(self.f2.canvas, self))
-        self.addToolBar(QtCore.Qt.BottomToolBarArea,
-                        NavigationToolbar(self.f3.canvas, self))
-        self.addToolBar(QtCore.Qt.BottomToolBarArea,
-                        NavigationToolbar(self.f4.canvas, self))
+        NavigationToolbar(self.f1.canvas, self).setGeometry(QtCore.QRect(10, 42, 600, 30))
+        NavigationToolbar(self.f2.canvas, self).setGeometry(QtCore.QRect(617, 42, 600, 30))
+        NavigationToolbar(self.f3.canvas, self).setGeometry(QtCore.QRect(10, 457, 600, 30))
+        NavigationToolbar(self.f4.canvas, self).setGeometry(QtCore.QRect(617, 457, 600, 30))
         self.Layout1 = QGridLayout(self.groupBox)
         self.Layout2 = QGridLayout(self.groupBox_2)
         self.Layout3 = QGridLayout(self.groupBox_3)
@@ -56,6 +55,7 @@ class curve_Display(QMainWindow,Ui_MainWindow):
         self.doubleSpinBox.valueChanged.connect(self.getDoubleSpinValue)
         self.spinBox.valueChanged.connect(self.getSpinValue)
         #self.get_data_dic()
+
         # 设定scope绘制策略
         self.scope.valueChanged.connect(lambda: self.draw4Figure(self.scope.value() + 94, self.scope.value() + 95,
                                                                  self.scope.value() + 96, self.scope.value() + 97))
@@ -189,6 +189,8 @@ class curve_Display(QMainWindow,Ui_MainWindow):
         filename, filetype = QFileDialog.getOpenFileName()  # 读取文件，将文件路径存储到filename中
         openfile = OpenFile()  # 实例化一个OpenFile，并打开filename
         self.data_dic = openfile.open_file_data(filename)
+        #调用进度条类以显示打开文件的进度条
+
         # 调用一次draw_data以确认ax-limit,同时默认打开4个Knee-Torque
         self.draw4Figure(48, 51, 54, 57)
         self.setupSlider()
@@ -222,9 +224,10 @@ def get_key(dic,value):
 
 if __name__ == '__main__':
     app = QApplication(sys.argv)#实例化一个QApplication
+    #openfile = OpenFile()
     #index_dic = openfile.open_file_index()#导入索引，存储到index_dic中
     #openfile.write_index(index_dic) #将index.csv中的索引以字典形式写到index.py中，便于打包程序时不包含index.csv文件
-    index_dic = index.get_index_dic()#从index.py中获得索引字典，需要运行一次以上注释掉的两行
+    index_dic = index.get_index_dic()#从index.py中获得索引字典，需要运行一次以上注释掉的三行
     ui = curve_Display(index_dic)#实例化一个curve_Display并运行所有初始化函数
     ui.show()
     sys.exit(app.exec())
