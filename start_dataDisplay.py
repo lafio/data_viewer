@@ -54,7 +54,7 @@ class curve_Display(QMainWindow,Ui_MainWindow):
         self.step = self.doubleSpinBox.value()
         self.doubleSpinBox.valueChanged.connect(self.getDoubleSpinValue)
         self.spinBox.valueChanged.connect(self.getSpinValue)
-        #self.get_data_dic()
+        self.get_data_dic()
 
         # 设定scope绘制策略
         self.scope.valueChanged.connect(lambda: self.draw4Figure(self.scope.value() + 94, self.scope.value() + 95,
