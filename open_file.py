@@ -22,12 +22,15 @@ class OpenFile():
             reader = csv.reader(f)
             header_row = next(reader)
             header_row = next(reader)
+            header_row = next(reader)
             data_dic = {}
             for i in range(285):  # 285
                 locals()['para' + str(i)] = []
             for row in reader:
                 try:
                     for i in range(285):  # 285
+                        if row[i] == '-nan':
+                            row[i] = 0
                         locals()['para' + str(i)].append(float(row[i]))
                         data_dic[i] = locals()['para'+str(i)]
                 except:

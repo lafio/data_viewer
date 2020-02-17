@@ -40,13 +40,13 @@ class curve_Display(QMainWindow,Ui_MainWindow):
             self.comboBox_3.setItemText(v, QtCore.QCoreApplication.translate("MainWindow", k))
             self.comboBox_4.setItemText(v, QtCore.QCoreApplication.translate("MainWindow", k))
         #设定comboBox对应的槽函数：触发display()
-        self.comboBox.currentIndexChanged.connect(lambda:self.display(1,7,index_dic[
+        self.comboBox.currentIndexChanged.connect(lambda:self.display(1,0,index_dic[
             self.comboBox.currentText()],self.comboBox.currentText()))
-        self.comboBox_2.currentIndexChanged.connect(lambda:self.display(2,7,index_dic[
+        self.comboBox_2.currentIndexChanged.connect(lambda:self.display(2,0,index_dic[
             self.comboBox_2.currentText()],self.comboBox_2.currentText()))
-        self.comboBox_3.currentIndexChanged.connect(lambda:self.display(3,7,index_dic[
+        self.comboBox_3.currentIndexChanged.connect(lambda:self.display(3,0,index_dic[
             self.comboBox_3.currentText()],self.comboBox_3.currentText()))
-        self.comboBox_4.currentIndexChanged.connect(lambda:self.display(4,7,index_dic[
+        self.comboBox_4.currentIndexChanged.connect(lambda:self.display(4,0,index_dic[
             self.comboBox_4.currentText()],self.comboBox_4.currentText()))
         #设定scrollBar等
         #self.limit = np.array(self.f1.ax.get_xlim() + self.f1.ax.get_ylim())
