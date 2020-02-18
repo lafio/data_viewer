@@ -429,7 +429,7 @@ class Ui_MainWindow(object):
 
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
-        MainWindow.setWindowTitle(_translate("MainWindow", "data_viewer"))
+        MainWindow.setWindowTitle(_translate("MainWindow", "数据查看器@deeprobotics.cn"))
         self.groupBox.setTitle(_translate("MainWindow", "FL"))
         self.groupBox_2.setTitle(_translate("MainWindow", "FR"))
         self.groupBox_3.setTitle(_translate("MainWindow", "HL"))
