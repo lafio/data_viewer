@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'dataDisplay.ui'
 #
-# Created by: PyQt5 UI code generator 5.13.0
+# Created by: PyQt5 UI code generator 5.14.1
 #
 # WARNING! All changes made in this file will be lost!
 
@@ -116,35 +116,28 @@ class Ui_MainWindow(object):
         self.gridLayout = QtWidgets.QGridLayout(self.layoutWidget)
         self.gridLayout.setContentsMargins(0, 0, 0, 0)
         self.gridLayout.setObjectName("gridLayout")
-        self.HipX = QtWidgets.QRadioButton(self.layoutWidget)
+        self.HipX = QtWidgets.QCheckBox(self.layoutWidget)
         font = QtGui.QFont()
-        font.setFamily("Arial")
         font.setPointSize(12)
         font.setBold(True)
         font.setWeight(75)
         self.HipX.setFont(font)
         self.HipX.setObjectName("HipX")
         self.gridLayout.addWidget(self.HipX, 0, 0, 1, 1)
-        self.HipY = QtWidgets.QRadioButton(self.layoutWidget)
+        self.HipY = QtWidgets.QCheckBox(self.layoutWidget)
         font = QtGui.QFont()
-        font.setFamily("Arial")
         font.setPointSize(12)
-        font.setBold(True)
-        font.setWeight(75)
         self.HipY.setFont(font)
         self.HipY.setObjectName("HipY")
         self.gridLayout.addWidget(self.HipY, 1, 0, 1, 1)
-        self.Knee = QtWidgets.QRadioButton(self.layoutWidget)
+        self.Knee = QtWidgets.QCheckBox(self.layoutWidget)
         font = QtGui.QFont()
-        font.setFamily("Arial")
         font.setPointSize(12)
-        font.setBold(True)
-        font.setWeight(75)
         self.Knee.setFont(font)
         self.Knee.setObjectName("Knee")
         self.gridLayout.addWidget(self.Knee, 2, 0, 1, 1)
         self.layoutWidget1 = QtWidgets.QWidget(self.centralwidget)
-        self.layoutWidget1.setGeometry(QtCore.QRect(1320, 90, 264, 91))
+        self.layoutWidget1.setGeometry(QtCore.QRect(1320, 90, 265, 91))
         font = QtGui.QFont()
         font.setPointSize(10)
         self.layoutWidget1.setFont(font)
