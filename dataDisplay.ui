@@ -11,7 +11,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>data_viewer</string>
+   <string>数据查看器@deeprobotics.cn</string>
   </property>
   <widget class="QWidget" name="centralwidget">
    <widget class="QGroupBox" name="groupBox">
@@ -246,10 +246,9 @@
     </property>
     <layout class="QGridLayout" name="gridLayout">
      <item row="0" column="0">
-      <widget class="QRadioButton" name="HipX">
+      <widget class="QCheckBox" name="HipX">
        <property name="font">
         <font>
-         <family>Arial</family>
          <pointsize>12</pointsize>
          <weight>75</weight>
          <bold>true</bold>
@@ -261,13 +260,10 @@
       </widget>
      </item>
      <item row="1" column="0">
-      <widget class="QRadioButton" name="HipY">
+      <widget class="QCheckBox" name="HipY">
        <property name="font">
         <font>
-         <family>Arial</family>
          <pointsize>12</pointsize>
-         <weight>75</weight>
-         <bold>true</bold>
         </font>
        </property>
        <property name="text">
@@ -276,13 +272,10 @@
       </widget>
      </item>
      <item row="2" column="0">
-      <widget class="QRadioButton" name="Knee">
+      <widget class="QCheckBox" name="Knee">
        <property name="font">
         <font>
-         <family>Arial</family>
          <pointsize>12</pointsize>
-         <weight>75</weight>
-         <bold>true</bold>
         </font>
        </property>
        <property name="text">
@@ -297,7 +290,7 @@
      <rect>
       <x>1320</x>
       <y>90</y>
-      <width>264</width>
+      <width>265</width>
       <height>91</height>
      </rect>
     </property>
