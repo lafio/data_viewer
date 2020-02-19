@@ -35,4 +35,4 @@ class OpenFile():
                         data_dic[i] = locals()['para'+str(i)]
                 except:
                     continue
-            return data_dic
+        return data_dic
