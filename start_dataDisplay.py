@@ -176,7 +176,6 @@ class curve_Display(QMainWindow,Ui_MainWindow):
     #display()，被comboBox作为槽函数调用，以改变画板上的图像
     def display(self,n,para_x,para_y,title):
         f = getattr(self,'f'+str(n))
-        print(self.data_dic[para_x])
         f.draw_data(self.data_dic[para_x],self.data_dic[para_y],title)
         f.Layout = getattr(self,'Layout'+str(n))
         if n == 1:
