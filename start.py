@@ -213,7 +213,7 @@ class fig_Canvas():
             self.num = 1
         self.ax.plot(x,y,label = title)
         #self.ax.scatter(x,y,s=5)
-        self.ax.legend(loc = 'upper right')
+        self.ax.legend(loc = 'upper left')
         self.ax.grid(True)
         self.canvas.draw()
         print('画好了')
