@@ -163,11 +163,13 @@ class curve_Display(QMainWindow,Ui_MainWindow):
         self.comboBox_2.setCurrentIndex(fr)
         self.comboBox_3.setCurrentIndex(hl)
         self.comboBox_4.setCurrentIndex(hr)
-        if fl >= 22 and hr <= 57:
+
+        if fl >= 22 and hr <= 57 and self.checkBox.isChecked():
             self.comboBox.setCurrentIndex(fl+36)
             self.comboBox_2.setCurrentIndex(fr+36)
             self.comboBox_3.setCurrentIndex(hl+36)
             self.comboBox_4.setCurrentIndex(hr+36)
+
     #绘制陀螺仪数据
     def draw3Figure(self,x,y,z):
         self.comboBox.setCurrentIndex(x)
