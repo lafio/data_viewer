@@ -3,7 +3,7 @@ import numpy as np
 from open_file import OpenFile
 from dataDisplay import Ui_MainWindow
 from PyQt5 import QtCore,QtWidgets
-from PyQt5.QtWidgets import QApplication,QMainWindow,QGridLayout,QFileDialog
+from PyQt5.QtWidgets import QApplication,QMainWindow,QGridLayout,QFileDialog,QSlider
 from matplotlib import pyplot as plt
 from matplotlib.backends.backend_qt5agg import FigureCanvasQTAgg as FigureCanvas,NavigationToolbar2QT as NavigationToolbar
 import index
@@ -50,9 +50,8 @@ class curve_Display(QMainWindow,Ui_MainWindow):
             self.comboBox_4.currentText()],self.comboBox_4.currentText()))
         #设定scrollBar等
         #self.limit = np.array(self.f1.ax.get_xlim() + self.f1.ax.get_ylim())
-        self.scroll = self.horizontalScrollBar
-        self.step = self.doubleSpinBox.value()
-        self.doubleSpinBox.valueChanged.connect(self.getDoubleSpinValue)
+        self.scroll = self.horizontalSlider
+        self.scroll_size=self.horizontalSlider_2
         self.spinBox.valueChanged.connect(self.getSpinValue)
         self.get_data_dic()
 
@@ -130,20 +129,24 @@ class curve_Display(QMainWindow,Ui_MainWindow):
         self.f2.num_limit = self.spinBox.value()
         self.f3.num_limit = self.spinBox.value()
         self.f4.num_limit = self.spinBox.value()
-    def getDoubleSpinValue(self):
-        self.step=self.doubleSpinBox.value()
     #scrollbar
     def setupSlider(self):
         self.lims = np.array(self.f1.ax.get_xlim())
         print(self.lims)
-        self.scroll.setPageStep(self.step * 100)
+        self.scroll_size.setMinimum(1)
+        self.scroll_size.setMaximum(20)
+        self.step=self.scroll_size.value()
+        self.scroll.setMinimum(self.lims[0])
+        self.scroll.setMaximum(self.lims[1])
+        self.scroll.setTickPosition(QSlider.TicksAbove)
+        #self.scroll.setTickInterval(self.scroll_size)
+        #self.scroll.setPageStep(self.step * 100)
         self.scroll.actionTriggered.connect(self.update)
         self.update()
     #scroll更新
     def update(self,evt=None):
-        r = self.scroll.value() / ((1 + self.step)*100)
-        l1 = self.lims[0] + r * np.diff(self.lims)
-        l2 = l1 + np.diff(self.lims) * self.step
+        l1=self.scroll.value()
+        l2 =l1 + self.scroll_size.value()
         self.f1.ax.set_xlim(l1, l2)
         self.f2.ax.set_xlim(l1, l2)
         self.f3.ax.set_xlim(l1, l2)
