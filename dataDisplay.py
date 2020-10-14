@@ -412,6 +412,7 @@ class Ui_MainWindow(object):
         self.horizontalSlider.setObjectName("horizontalSlider")
         self.horizontalSlider_2 = QtWidgets.QSlider(self.centralwidget)
         self.horizontalSlider_2.setGeometry(QtCore.QRect(9, 860, 1161, 22))
+        self.horizontalSlider_2.setProperty("value", 5)
         self.horizontalSlider_2.setOrientation(QtCore.Qt.Horizontal)
         self.horizontalSlider_2.setTickPosition(QtWidgets.QSlider.TicksBothSides)
         self.horizontalSlider_2.setObjectName("horizontalSlider_2")

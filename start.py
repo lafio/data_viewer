@@ -76,6 +76,7 @@ class curve_Display(QMainWindow,Ui_MainWindow):
         self.ecat_time.toggled.connect(lambda:self.draw4Figure(3,4,5,6))
         self.cpu_rate.toggled.connect(lambda:self.draw4Figure(6,6,6,6))
         self.open_btn.clicked.connect(self.get_data_dic)
+        self.scroll_size.sliderMoved.connect(self.update)
     #radioButton的槽函数，根据button的不同对应不同的绘图对象
     def radioButtonState(self):
         if self.HipX.isChecked():
@@ -189,6 +190,7 @@ class curve_Display(QMainWindow,Ui_MainWindow):
             getattr(self,'groupBox_'+str(n)).setTitle(title)
         f.Layout.addWidget(f.canvas)
         print('画板放上去了')
+        #self.update()
     def get_data_dic(self):
         # 打开数据csv
         filename, filetype = QFileDialog.getOpenFileName()  # 读取文件，将文件路径存储到filename中
