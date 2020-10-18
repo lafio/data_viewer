@@ -1,11 +1,12 @@
-import sys
+import sys,base64,os
 import numpy as np
 from open_file import OpenFile
 from dataDisplay import Ui_MainWindow
-from PyQt5 import QtCore,QtWidgets
-from PyQt5.QtWidgets import QApplication,QMainWindow,QGridLayout,QFileDialog,QSlider
+from PyQt5 import QtCore,QtGui
+from PyQt5.QtWidgets import QApplication,QMainWindow,QGridLayout,QFileDialog,QSlider,QSplashScreen
 from matplotlib import pyplot as plt
 from matplotlib.backends.backend_qt5agg import FigureCanvasQTAgg as FigureCanvas,NavigationToolbar2QT as NavigationToolbar
+from dataViewer_pic import *
 import index
 
 #在mainwindow绘制曲线并添加到gridlayout
@@ -192,15 +193,18 @@ class curve_Display(QMainWindow,Ui_MainWindow):
         print('画板放上去了')
         #self.update()
     def get_data_dic(self):
-        # 打开数据csv
-        filename, filetype = QFileDialog.getOpenFileName()  # 读取文件，将文件路径存储到filename中
-        openfile = OpenFile()  # 实例化一个OpenFile，并打开filename
-        self.data_dic = openfile.open_file_data(filename)
-        #调用进度条类以显示打开文件的进度条
+        try:
+            # 打开数据csv
+            filename, filetype = QFileDialog.getOpenFileName()  # 读取文件，将文件路径存储到filename中
+            openfile = OpenFile()  # 实例化一个OpenFile，并打开filename
+            self.data_dic = openfile.open_file_data(filename)
+            #调用进度条类以显示打开文件的进度条
 
-        # 调用一次draw_data以确认ax-limit,同时默认打开4个Knee-Torque
-        self.draw4Figure(48, 51, 54, 57)
-        self.setupSlider()
+            # 调用一次draw_data以确认ax-limit,同时默认打开4个Knee-Torque
+            self.draw4Figure(48, 51, 54, 57)
+            self.setupSlider()
+        except:
+            pass
 #定义画板并构造绘制函数
 class fig_Canvas():
     def __init__(self):
@@ -228,13 +232,21 @@ class fig_Canvas():
 #对于给定字典，输入值返回对应的键
 def get_key(dic,value):
     return [k for k,v in dic.items() if v == value][0]
-
+def get_pic(pic_code,pic_name):
+    image = open(pic_name,'wb')
+    image.write(base64.b64decode(pic_code))
+    image.close()
 if __name__ == '__main__':
     app = QApplication(sys.argv)#实例化一个QApplication
     #openfile = OpenFile()
     #index_dic = openfile.open_file_index()#导入索引，存储到index_dic中
     #openfile.write_index(index_dic) #将index.csv中的索引以字典形式写到index.py中，便于打包程序时不包含index.csv文件
+    get_pic(dataViewer_jpg, 'dataViewer.jpg')
+    splash = QSplashScreen(QtGui.QPixmap("dataViewer.jpg"))
+    splash.show()
     index_dic = index.get_index_dic()#从index.py中获得索引字典，需要运行一次以上注释掉的三行
     ui = curve_Display(index_dic)#实例化一个curve_Display并运行所有初始化函数
+    splash.close()
     ui.show()
+    os.remove('dataViewer.jpg')
     sys.exit(app.exec())
