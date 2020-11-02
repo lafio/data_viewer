@@ -133,7 +133,8 @@ class curve_Display(QMainWindow,Ui_MainWindow):
         self.f4.num_limit = self.spinBox.value()
     #scrollbar
     def setupSlider(self):
-        self.lims = np.array(self.f1.ax.get_xlim())
+        #self.lims = np.array(self.f1.ax.get_xlim())
+        self.lims = [self.data_dic[0][0],self.data_dic[-1][0]]
         print(self.lims)
         self.scroll_size.setMinimum(1)
         self.scroll_size.setMaximum(20)
@@ -144,7 +145,8 @@ class curve_Display(QMainWindow,Ui_MainWindow):
         #self.scroll.setTickInterval(self.scroll_size)
         #self.scroll.setPageStep(self.step * 100)
         self.scroll.actionTriggered.connect(self.update)
-        self.update()
+        self.scroll.setValue(0)
+        #self.update()
     #scroll更新
     def update(self,evt=None):
         l1=self.scroll.value()
